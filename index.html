@@ -8,12 +8,34 @@
     <title>Servicios Topográficos Profesionales</title>
     <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/leadmark.css">
+    <style>
+    /* Estilos para la transición de página */
+    .transition-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #007bff; /* Color primario de tu plantilla */
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .transition-overlay.is-active {
+        opacity: 1;
+        visibility: visible;
+    }
+   
+</style>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+    <div class="transition-overlay" id="transitionOverlay"></div>
 
-  <nav class="navbar custom-navbar navbar-expand-md navbar-light fixed-top" data-spy="affix" data-offset-top="10">
+<nav class="navbar custom-navbar navbar-expand-md navbar-light fixed-top" data-spy="affix" data-offset-top="10">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="#home">
             <img src="assets/imgs/logo.svg" alt="Logo Topografía">
         </a>
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +62,7 @@
                     <a class="nav-link" href="#contact">Contacto</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="ml-4 nav-link btn btn-primary btn-sm rounded" onclick="redirigir('Área Clientes')">Área Clientes (Ver Planos)</a>
+                    <a href="#" class="ml-4 nav-link btn btn-primary btn-sm rounded" onclick="goToPlanos()">Clientes (Ver Planos)</a>
                 </li>
             </ul>
         </div>
@@ -112,15 +134,15 @@
                     <h6 class="section-title mb-0">Sobre Nosotros</h6>
                     <h6 class="section-subtitle mb-4">Experiencia y Tecnología</h6>
                     <p>Somos especialistas en medición y representación gráfica del terreno. Con años de experiencia en el sector, garantizamos resultados exactos que cumplen con todas las normativas legales y técnicas vigentes.</p>
-                    <img src="assets/imgs/about.jpg" alt="Equipo de topografia" class="w-100 mt-3 shadow-sm">
+                    <img src="assets/imgs/terreno.jpg" alt="Equipo de topografia" class="w-100 mt-3 shadow-sm">
                 </div>
                 <div class="col-md-6 pl-md-5">
                     <div class="row">
                         <div class="col-6">
-                            <img src="assets/imgs/about-1.jpg" alt="Trabajo de campo" class="w-100 shadow-sm">
+                            <img src="assets/imgs/diseño1.png" alt="Trabajo de campo" class="w-100 shadow-sm">
                         </div>
                         <div class="col-6">
-                            <img src="assets/imgs/about-2.jpg" alt="Planos en oficina" class="w-100 shadow-sm">
+                            <img src="assets/imgs/logo kike-Photoroom.png" alt="Planos en oficina" class="w-100 shadow-sm">
                         </div>
                         <div class="col-12 mt-4">
                             <p>Utilizamos equipos de última generación (Estaciones Totales Robóticas, GPS Diferencial RTK) para asegurar la máxima precisión en cada punto medido.</p>
@@ -135,6 +157,9 @@
     </section>
     <section id="portfolio" class="section portfolio-section">
         <div class="container">
+
+             <center><img src="assets/imgs/Publicidad.jpg" class="img-fluid" alt="Publicidad" width="640" height="480"></center>
+
             <h6 class="section-title text-center">Portafolio de Proyectos</h6>
             <h6 class="section-subtitle mb-5 text-center">Explore nuestros últimos trabajos realizados</h6>
             
@@ -156,9 +181,9 @@
             <div class="portfolio-container"> 
                 <div class="col-md-6 col-lg-4 web new">
                     <div class="portfolio-item">
-                        <img src="assets/imgs/web-1.jpg" class="img-fluid" alt="Levantamiento con Drone">
+                        <img src="assets/imgs/diseño casa.png" class="img-fluid" alt="Levantamiento con Drone">
                         <div class="content-holder">
-                            <a class="img-popup" href="assets/imgs/web-1.jpg"></a>
+                            <a class="img-popup" href="assets/imgs/diseño1.png"></a>
                             <div class="text-holder">
                                 <h6 class="title">FOTOGRAMETRÍA</h6>
                                 <p class="subtitle">Modelo 3D Terreno Finca "La Esperanza"</p>
@@ -168,9 +193,9 @@
                 </div>
                 <div class="col-md-6 col-lg-4 web new">
                     <div class="portfolio-item">
-                        <img src="assets/imgs/web-2.jpg" class="img-fluid" alt="Curvas de Nivel">
+                        <img src="assets/imgs/diseño2.png" class="img-fluid" alt="Curvas de Nivel">
                         <div class="content-holder">
-                            <a class="img-popup" href="assets/imgs/web-2.jpg"></a>
+                            <a class="img-popup" href="assets/imgs/diseño3.png"></a>
                             <div class="text-holder">
                                 <h6 class="title">ALTIMETRÍA</h6>
                                 <p class="subtitle">Generación de Curvas de Nivel</p>
@@ -180,9 +205,9 @@
                 </div>
                 <div class="col-md-6 col-lg-4 advertising new">
                     <div class="portfolio-item">
-                        <img src="assets/imgs/advertising-2.jpg" class="img-fluid" alt="Trabajo de campo">                         
+                        <img src="assets/imgs/levantamiento.jpg" class="img-fluid" alt="Trabajo de campo">                         
                         <div class="content-holder">
-                            <a class="img-popup" href="assets/imgs/advertising-2.jpg"></a>
+                            <a class="img-popup" href="assets/imgs/casa.jpg"></a>
                             <div class="text-holder">
                                 <h6 class="title">LEVANTAMIENTO</h6>
                                 <p class="subtitle">Medición Perimétrica Lote Urbano</p>
@@ -192,9 +217,9 @@
                 </div> 
                 <div class="col-md-6 col-lg-4 web">
                     <div class="portfolio-item">
-                        <img src="assets/imgs/web-4.jpg" class="img-fluid" alt="Modelo Digital">
+                        <img src="assets/imgs/diseño1.png" class="img-fluid" alt="Modelo Digital">
                         <div class="content-holder">
-                            <a class="img-popup" href="assets/imgs/web-4.jpg"></a>
+                            <a class="img-popup" href="assets/imgs/diseño3.png"></a>
                             <div class="text-holder">
                                 <h6 class="title">MODELADO</h6>
                                 <p class="subtitle">Nube de puntos densa</p>
@@ -205,9 +230,9 @@
 
                 <div class="col-md-6 col-lg-4 advertising"> 
                     <div class="portfolio-item">
-                        <img src="assets/imgs/advertising-1.jpg" class="img-fluid" alt="Replanteo">                             
+                        <img src="assets/imgs/medidas.jpg" class="img-fluid" alt="Replanteo">                             
                         <div class="content-holder">
-                            <a class="img-popup" href="assets/imgs/advertising-1.jpg"></a>
+                            <a class="img-popup" href="assets/imgs/logo-Photoroom.png"></a>
                             <div class="text-holder">
                                 <h6 class="title">REPLANTEO</h6>
                                 <p class="subtitle">Ubicación de ejes para cimentación</p>
@@ -218,12 +243,12 @@
                 
                 <div class="col-md-6 col-lg-4 branding new">
                     <div class="portfolio-item">
-                        <img src="assets/imgs/branding-1.jpg" class="img-fluid" alt="Plano PDF">                        
+                        <img src="assets/imgs/casa.jpg" class="img-fluid" alt="Plano PDF">                        
                         <div class="content-holder">
-                            <a class="img-popup" href="assets/imgs/branding-1.jpg"></a>
+                            <a class="img-popup" href="assets/imgs/diseño casa.png"></a>
                             <div class="text-holder">
-                                <h6 class="title">PLANIMETRÍA</h6>
-                                <p class="subtitle">Plano Final Visado</p>
+                                <h6 class="title">LEVANTAMIENTOS</h6>
+                                <p class="subtitle">Planos de casas o locales comerciales</p>
                             </div>
                         </div> 
                     </div>
@@ -239,7 +264,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="card border-0 mb-4">
-                        <img src="assets/imgs/blog-1.jpg" alt="" class="card-img-top w-100">
+                        <img src="assets/imgs/medidas.jpg" alt="" class="card-img-top w-100">
                         <div class="card-body">                         
                             <h6 class="card-title">¿Por qué es vital un deslinde antes de comprar?</h6>
                             <p>Evite problemas legales asegurando los límites de su propiedad antes de invertir.</p>
@@ -249,7 +274,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card border-0 mb-4">
-                        <img src="assets/imgs/blog-2.jpg" alt="" class="card-img-top w-100">
+                        <img src="assets/imgs/gps.jpg" alt="" class="card-img-top w-100">
                         <div class="card-body">                         
                             <h6 class="card-title">Tecnología GPS vs. Estación Total</h5>
                             <p>Diferencias, ventajas y cuándo utilizar cada equipo en un levantamiento.</p>
@@ -259,7 +284,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card border-0 mb-4">
-                        <img src="assets/imgs/blog-3.jpg" alt="" class="card-img-top w-100">
+                        <img src="assets/imgs/terreno1.jpg" alt="" class="card-img-top w-100" width="640" height="480">
                         <div class="card-body">                         
                             <h6 class="card-title">Trámites para subdivisión de tierras</h6>
                             <p>Guía paso a paso sobre los requisitos municipales para lotizaciones.</p>
@@ -403,17 +428,51 @@
     
     <script src="assets/js/leadmark.js"></script>
 
+   <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+    <script src="assets/vendors/isotope/isotope.pkgd.js"></script>
+    <script src="assets/js/leadmark.js"></script>
+
     <script>
-        $(document).ready(function(){
-            $(".navbar-nav .nav-link").click(function(){
-                $(".navbar-collapse").collapse('hide');
-            });
+    // Función para redireccionar con transición animada
+    function navigateWithTransition(targetUrl) {
+        const overlay = document.getElementById('transitionOverlay');
+        
+        // 1. Activa la capa de transición (fade-in)
+        overlay.classList.add('is-active');
+
+        // 2. Espera 500ms (el tiempo que dura la transición CSS)
+        setTimeout(() => {
+            // 3. Redirige a la nueva página
+            window.location.href = targetUrl;
+        }, 500); // 500ms
+    }
+
+    // Adaptamos tu antigua función 'redirigir' para manejar el botón especial
+    function redirigir(seccion) {
+        alert('La sección ' + seccion + ' estará disponible próximamente.');
+        // No hace una transición completa ya que la página no existe
+    }
+    
+    // Función especial para ir a la página de Planos (Area Clientes)
+    function goToPlanos() {
+        navigateWithTransition('planos.html');
+    }
+
+    // Script de Cierre de Menú en Móvil (Mantenemos la corrección anterior)
+    $(document).ready(function(){
+        // Cuando se hace clic en cualquier enlace dentro del menú de navegación
+        $(".navbar-nav .nav-link").on('click', function(){
+            $(".navbar-collapse").collapse('hide');
         });
         
-        // Tu función de alerta para el Área de Clientes
-        function redirigir(seccion) {
-            alert('La sección ' + seccion + ' estará disponible próximamente.');
-        }
-    </script>
+        // El logo principal siempre lleva a home (sin transición, es la misma página)
+        $('.navbar-brand').on('click', function() {
+            $('html, body').animate({scrollTop: 0}, 800);
+            return false;
+        });
+    });
+</script>
 </body>
 </html>
