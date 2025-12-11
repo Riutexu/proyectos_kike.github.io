@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Acceso a Planos para Clientes - Proyectos KIKE.">
+    <title>Acceso a Planos</title>
+    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/leadmark.css">
+
+    <style>
+        .transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #007bff; /* Color primario de tu plantilla */
+            opacity: 1; /* Comienza visible para el fade-out */
+            visibility: visible;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .transition-overlay.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Estilos específicos para la página de Login */
+        #login-section {
+            padding: 100px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .login-card {
+            border: none;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="transition-overlay" id="transitionOverlay"></div>
+
+    <nav class="navbar custom-navbar navbar-expand-md navbar-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html" onclick="navigateBack(event, 'index.html')">
+            <img src="assets/imgs/logo.svg" alt="Logo Topografía">
+        </a>
+        
+        <div class="navbar-collapse collapse show">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="index.html" class="ml-4 nav-link btn btn-primary btn-sm rounded" onclick="navigateBack(event, 'index.html')">Regresar a Página Principal</a>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+    
+    <section id="login-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10">
+                    <div class="card login-card">
+                        <h4 class="text-center mb-4">🔑 Acceso a Planos de Clientes</h4>
+                        <p class="text-muted text-center mb-5">Ingrese sus credenciales o escanee su código QR de acceso.</p>
+                        
+                        <form id="accessForm">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="fullName">Nombre y Apellido</label>
+                                    <input type="text" class="form-control" id="fullName" required placeholder="Ej: Juan Pérez">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="cedula">Cédula de Identidad</label>
+                                    <input type="text" class="form-control" id="cedula" required placeholder="Ej: V-12345678">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="planCode">Código de Plano</label>
+                                    <input type="text" class="form-control" id="planCode" required placeholder="Ej: P-0000">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="specialCode">Código Especial de Plano</label>
+                                    <input type="password" class="form-control" id="specialCode" required placeholder="Código secreto">
+                                </div>
+                            </div>
+                            
+                            <hr>
+
+                            <div class="form-group">
+                                <label>O acceda escaneando su Código QR:</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="qrUpload" accept="image/*">
+                                        <label class="custom-file-label" for="qrUpload">Subir archivo QR...</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="qrScanButton" onclick="simulateScan()">
+                                            <i class="ti-camera"></i> Usar Cámara
+                                        </button>
+                                    </div>
+                                </div>
+                                <small class="form-text text-muted">El código debe estar vinculado a su nombre, cédula y plano.</small>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block mt-4">Acceder a Planos</button>
+                            
+                            <div class="alert alert-warning mt-4 d-none" id="alertMessage">
+                                **ALERTA (SIMULACIÓN):** Este código no pertenece a este usuario, por favor escanee el código del usuario asignado.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="mt-5 py-4 border-top border-secondary text-center">
+        <p class="mb-0 small">© <script>document.write(new Date().getFullYear())</script>, Proyectos KIKE. Todos los derechos reservados.</p>     
+    </footer>
+    
+    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+    <script src="assets/js/leadmark.js"></script>
+
+    <script>
+        // 1. Desactivar la transición al cargar la página (Fade-out)
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const overlay = document.getElementById('transitionOverlay');
+            // Retraso pequeño para asegurar que el DOM ha sido pintado
+            setTimeout(() => {
+                overlay.classList.add('is-hidden');
+            }, 10); 
+        });
+
+        // 2. Función para navegar de vuelta a Home con transición
+        function navigateBack(event, targetUrl) {
+            event.preventDefault(); // Evita la navegación inmediata
+            const overlay = document.getElementById('transitionOverlay');
+            overlay.classList.remove('is-hidden');
+            overlay.classList.add('is-active'); // Re-activa la transición (fade-in)
+
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 500); 
+        }
+
+        // 3. SIMULACIÓN de Validación de QR (La lógica real de validación de QR se haría en el backend o con librerías más complejas)
+        function simulateScan() {
+            // Lógica para abrir la cámara o procesar la imagen cargada
+            alert("Simulando escaneo de Código QR. La validación se realizará en el próximo desarrollo.");
+
+            // Si la validación fallara (como tu pides), mostraríamos el mensaje:
+            // document.getElementById('alertMessage').classList.remove('d-none');
+            
+            return false;
+        }
+
+        // 4. Lógica de Alerta de QR (Condición solicitada)
+        // La condición de que "solo lea códigos qr válidos para dicha página" y "que si el código se intenta escanear en otro plano
+        // lanze la alerta de 'este código no pertenece a este usuario'" es una función de **Backend (servidor)**.
+        // En frontend (HTML/CSS/JS simple) solo podemos **simular** la alerta:
+        document.getElementById('accessForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // SIMULACIÓN DE VALIDACIÓN
+            const isInvalidQR = Math.random() < 0.5; // 50% de probabilidad de fallo de simulación
+
+            if (isInvalidQR) {
+                 // Si falla, mostramos la alerta que mencionaste
+                const alertBox = document.getElementById('alertMessage');
+                alertBox.classList.remove('d-none');
+                alertBox.scrollIntoView({ behavior: 'smooth' }); // Llevamos la vista a la alerta
+            } else {
+                alert("Acceso exitoso (Simulado). Redirigiendo a la vista de planos...");
+                // Aquí iría la redirección a la página de Planos Real
+            }
+        });
+    </script>
+
+    <script>
+    // Función para redireccionar con transición animada
+    function navigateWithTransition(targetUrl) {
+        const overlay = document.getElementById('transitionOverlay');
+        
+        // 1. Activa la capa de transición (fade-in)
+        overlay.classList.add('is-active');
+
+        // 2. Espera 500ms (el tiempo que dura la transición CSS)
+        setTimeout(() => {
+            // 3. Redirige a la nueva página
+            window.location.href = targetUrl;
+        }, 500); // 500ms
+    }
+
+    // Adaptamos tu antigua función 'redirigir' para manejar el botón especial
+    function redirigir(seccion) {
+        alert('La sección ' + seccion + ' estará disponible próximamente.');
+        // No hace una transición completa ya que la página no existe
+    }
+    
+    // Función especial para ir a la página de Planos (Area Clientes)
+    function goToPlanos() {
+        navigateWithTransition('planos.html');
+    }
+
+    // Script de Cierre de Menú en Móvil (Mantenemos la corrección anterior)
+    $(document).ready(function(){
+        // Cuando se hace clic en cualquier enlace dentro del menú de navegación
+        $(".navbar-nav .nav-link").on('click', function(){
+            $(".navbar-collapse").collapse('hide');
+        });
+        
+        // El logo principal siempre lleva a home (sin transición, es la misma página)
+        $('.navbar-brand').on('click', function() {
+            $('html, body').animate({scrollTop: 0}, 800);
+            return false;
+        });
+    });
+</script>
+
+</body>
+</html>
